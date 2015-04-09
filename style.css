@@ -1,0 +1,75 @@
+body{
+    font-family: Verdana;
+    font-size: 12pt;
+    padding:0;
+    margin: 0;
+    background-color:#efefef;
+    color: #777;
+    margin: 50px;
+}
+li{
+    list-stlye-type: none;
+}
+#wrapper{
+
+    width: 700px;
+    margin: 0 auto;
+}
+#chatroom{
+    float:left;
+    display:block;
+    width: 500px;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #555;
+    box-shadow: 0 0 7px #999;
+    margin: 0 auto;
+    padding: 5px;
+}
+#chatlog{
+    height: 270px;
+    overflow-y: scroll
+}
+.chatlinemsg{
+    display:block;
+    margin: 2px;
+}
+
+.chatter{
+    display: inline-block;
+    margin-right: 10px;
+    width: 80px;
+}
+.chatmsg{
+
+}
+#chatlinemsg{
+    width: 100%;
+    margin: 10px 0 0 0 ;
+border-radius: 3px;
+}
+.announcement{
+    display:block;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 0.95em;
+    font-weight: bold;
+    padding: 0 3px 0 3px;
+    background-color: #B5C8C8;
+}
+#chatroster{
+border: solid 1px red;
+    margin-left: 515px;
+    height:300px;
+    background-color: #fff;
+    background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #555;
+    box-shadow: 0 0 7px #999;
+    padding: 5x;
+}
+#chatroster li{
+    display:block;
+    list-style-type: none;
+}
