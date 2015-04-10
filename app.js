@@ -31,7 +31,7 @@ console.log ("server is up at http://localhost/");
     var roster = [];
     var chatTimes = [];
     var players= [];
-    var tacos =  ["https://38.media.tumblr.com/3d61e24ed05f7e12f9d16152b954d74d/tumblr_n9biwafTc11s00daco1_400.gif","http://media.giphy.com/media/11VATENd1pYySk/giphy.gif","http://media3.giphy.com/media/3KAxGKtEQpTmo/giphy.gif","http://www.animateit.net/data/media/august2009/th_dance.gif","http://blendernpr.org/toonery/wp-content/uploads/2012/12/TacoDance.gif","http://www.kimwerker.com/wp-content/uploads/2012/11/TacoDance-11f.gif"]
+    var tacos =  ["https://38.media.tumblr.com/3d61e24ed05f7e12f9d16152b954d74d/tumblr_n9biwafTc11s00daco1_400.gif","http://media.giphy.com/media/11VATENd1pYySk/giphy.gif","http://media3.giphy.com/media/3KAxGKtEQpTmo/giphy.gif","http://www.animateit.net/data/media/august2009/th_dance.gif","http://blendernpr.org/toonery/wp-content/uploads/2012/12/TacoDance.gif","http://www.kimwerker.com/wp-content/uploads/2012/11/TacoDance-11f.gif"];
     var tacoIndex =0;
 
 function handler(req, res) {
@@ -92,7 +92,7 @@ function handler(req, res) {
                 });//readfile
             break;
         }//switch
-};//handler
+}//handler
 
 
 io.sockets.on('connect' , function(socket){
@@ -125,7 +125,7 @@ io.sockets.on('connect' , function(socket){
         io.sockets.emit('playerJoined',{newPlayer: p});
         io.sockets.emit('userarrived',{un: data.un});
         io.sockets.emit('chatannouncement', {announcement: data.un + ' has entered the room'});
-    })//identify
+    });//identify
     socket.on('disconnect',function(){
         var i = sockets.indexOf(socket);
         sockets.splice(i,1);
@@ -136,7 +136,7 @@ io.sockets.on('connect' , function(socket){
         players.splice(i,1);
         chatTimes.splice(i,1);
 
-    })//
+    });//
     socket.on('sendchat',function(data){
         console.log(data);
         var i = sockets.indexOf(socket);
@@ -207,8 +207,8 @@ function parseChat(data,socket){
             console.log(args[0]+"<-");
             switch(args[0]){
                 case 'whisper':
-                    sockets[roster.indexOf(args[1])].emit('whisper', {from: "»" + un,msg: args.join(" ").substr(args[1].length + 9)})
-                    socket.emit('whispersent', {to: "«"+ args[1],msg: args.join(" ").substr(args[1].length + 9)})
+                    sockets[roster.indexOf(args[1])].emit('whisper', {from: "»" + un,msg: args.join(" ").substr(args[1].length + 9)});
+                    socket.emit('whispersent', {to: "«"+ args[1],msg: args.join(" ").substr(args[1].length + 9)});
                     break;
                 case 'roll':
                     io.sockets.emit('chatannouncement', {announcement: data.un + ' has rolled a ' + Math.floor(Math.random()* 100) });
