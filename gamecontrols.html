@@ -1,0 +1,45 @@
+<script>
+    $(document).ready(function(){
+
+        $('#fire').click(function(){
+            alert('fire!!!!!');
+        })
+
+        $('button').on('click',function(e){
+            socket.emit('movecmd',{direction: $(this).attr('id').replace("move","")});
+        });
+
+
+        $('#joystick').mousedown(function(){
+            $(this).mousemove(function(e){
+                $(this).css('cursor','move');
+                $('#moveRight').html(e.offsetX);
+                if( e.offsetX <40){
+                    socket.emit('movecmd',{direction: 'Left'});
+                }else if(e.offsetX > 50){
+                    socket.emit('movecmd',{direction: 'Right'});
+                }
+
+                if( e.offsetY <40){
+                    socket.emit('movecmd',{direction: 'Up'});
+                }else if(e.offsetY > 50){
+                    socket.emit('movecmd',{direction: 'Down'});
+                }
+
+
+
+            })
+        })
+
+    })
+</script>
+<p>CONTROLS</p>
+
+Angle: <input type="text" id="angle" size="1" value=""><br/>
+Power: <input type="text" id="power" size="1" value=""><br/>
+
+<button id="fire">FIRE</button>
+<p>MOVEMENT</p>
+<button id="moveUp">Up</button><button id="moveDown">Down</button><br/>
+<button id="moveLeft">Left</button><button id="moveRight">Right</button>
+<div id="joystick"></div>

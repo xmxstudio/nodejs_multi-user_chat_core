@@ -10,10 +10,6 @@ ul{
     margin:0px;
     padding:0px;
 }
-li{
-    list-stlye-type: none;
-    margin: 3px;
-}
 #wrapper{
 
     width: 700px;
@@ -33,8 +29,12 @@ li{
 }
 #chatlog{
     height: 270px;
+    width: 500px;
     overflow-y: scroll;
+    white-space: pre-wrap;
+    display:block;
 }
+
 .chatlinemsg{
     display:block;
     margin: 2px;
@@ -46,7 +46,11 @@ li{
     width: 80px;
 }
 .chatmsg{
-
+/*border: solid 1px red;
+    display:inline-block;
+max-width: 390px;
+    white-space: pre-wrap;
+    flex-wrap: wrap;*/
 }
 #chatlinemsg{
     width: 100%;
@@ -67,20 +71,24 @@ li{
     margin-left: 515px;
     height:300px;
     background-color: #fff;
-    border-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     border: solid 1px #555;
     box-shadow: 0 0 7px #999;
     padding: 5px;
+    overflow-y: scroll;
 }
 #chatroster li{
     display:block;
     list-style-type: none;
     border-radius: 6px;
-    background-color: #c0c0c0;
     padding: 3px;
+    margin: 3px;
 }
-
-
 
 input:focus,
 select:focus,
@@ -102,19 +110,61 @@ button:focus {
     padding: 5px;
     margin-bottom: 3px;
 }
-#gamecanvas{
-    border-radius: 6px;
-    background-color: #c0c0c0;
-    height: 100%;
-    display:block;
-}
 .whisper{
     font-style: italic;
     color: #000066;
 }
 .self{
     font-weight: bold;
-    background-color: #fff !important;
+    background-color: #c0c0c0 !important;
 
 
+}
+.afk{
+    background: url('http://www.sat-clan.de/inc/images/tsicons/server/969094319.png') no-repeat 125px 4px;
+}
+
+
+
+
+/* GAME RELATED STYLE YAY! */
+
+#gamecanvas{
+    border-radius: 6px;
+    background-color: #c0c0c0;
+    height: 100%;
+    display:block;
+    margin-left: 100px;
+}
+#gamecontrols{
+    width: 100px;
+    padding: 3px;
+    float: left;
+    display:block;
+}
+#gamecontrols input{
+    border-radius: 4px;
+    margin: 2px;
+}
+#gcanvas{
+padding: 2px;
+    /*border: solid 1px #000;*/
+}
+/*
+.player{
+    position: relative;
+    border: solid 1px #000;
+    background-color: #ccc;
+    color: #fff;
+    border-radius: 4px;
+    padding: 2px;
+    font-size:0.95em;
+height: 20px;
+    width: 20px;
+}*/
+#joystick{
+    border-radius: 30px;
+    width: 80px;
+    height: 80px;
+    border: solid 1px red;
 }
