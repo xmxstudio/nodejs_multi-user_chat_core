@@ -6,7 +6,7 @@ var app = require('http').createServer(handler)
     , fs = require('fs');
     //, red = require('redis').createClient( '6379', 'localhost');
 
-app.listen(80);
+app.listen(8080);
 
 
 
