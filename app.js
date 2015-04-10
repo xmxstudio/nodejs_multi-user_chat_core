@@ -31,7 +31,7 @@ console.log ("server is up at http://localhost/");
     var roster = [];
     var chatTimes = [];
     var players= [];
-    var tacos =  ["http://media3.giphy.com/media/3KAxGKtEQpTmo/giphy.gif","http://www.animateit.net/data/media/august2009/th_dance.gif","http://blendernpr.org/toonery/wp-content/uploads/2012/12/TacoDance.gif","http://www.kimwerker.com/wp-content/uploads/2012/11/TacoDance-11f.gif"]
+    var tacos =  ["https://38.media.tumblr.com/3d61e24ed05f7e12f9d16152b954d74d/tumblr_n9biwafTc11s00daco1_400.gif","http://media.giphy.com/media/11VATENd1pYySk/giphy.gif","http://media3.giphy.com/media/3KAxGKtEQpTmo/giphy.gif","http://www.animateit.net/data/media/august2009/th_dance.gif","http://blendernpr.org/toonery/wp-content/uploads/2012/12/TacoDance.gif","http://www.kimwerker.com/wp-content/uploads/2012/11/TacoDance-11f.gif"]
     var tacoIndex =0;
 
 function handler(req, res) {
@@ -222,11 +222,26 @@ function parseChat(data,socket){
                        tacoIndex = 0;
                    }
                    break;
+                case 'nick':
+                    // /nick taco
+                    //args[1] new nick
+                    console.log("OMG" + roster);
+                    var i = sockets.indexOf(socket);
+                /*    var p =roster[i];
+                    p.username = args[1];
+                    roster[i] = p;*/
+                    roster[i] = args[1];
+                    console.log(roster + "OMG");
+                    io.sockets.emit('chatannouncement', {announcement: data.un + ' has changed their nick to ' + args[1] });
+                    io.sockets.emit('nickchange', {oldnick: data.un , newnick: args[1]});
+                    console.log("sending old nick " +data.un + " new " + args[1] );
+
+                    break;
                 default:
 
             }//switch
         }else{
-            io.sockets.emit('chatmsg',{from: data.un,msg: sanitize(data.msg)});
+            io.sockets.emit('chatmsg',{from: sanitize(roster[sockets.indexOf(socket)]),msg: sanitize(data.msg)});
         }
     }
 }

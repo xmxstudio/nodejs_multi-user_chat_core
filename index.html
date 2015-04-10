@@ -52,6 +52,10 @@
             addWhisper(data.to, data.msg);
         });
 
+        socket.on('nickchange',function(data){
+               // data.oldnick  data.newnick
+                updateNick(data.oldnick, data.newnick);
+        });
 
 
         /* GAME RELATED */

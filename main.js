@@ -52,6 +52,7 @@ $(document).ready(function(){
 });//document.ready
 
 function sendChat(){
+    console.log("client sending sendchat. username: "+ username);
     socket.emit('sendchat',{un: username,msg: $('#chatlinemsg').val()});
 };
 
@@ -126,3 +127,20 @@ function drawPlayer(player){
 }
 
 
+function updateNick(oldnick, newnick){
+    /*roster[roster.indexOf(oldnick)] = newnick;*/
+
+    console.log ("CLIENTROSTER" + roster );
+    roster.forEach(function(v,i){
+console.log(i + " - " + v );
+        if(v == oldnick){
+            console.log("updating roster index" + i);
+            roster[i]=newnick;
+            username = newnick;
+            updateRosterDisplay();
+        }
+    });
+    console.log(roster + "CLIENTROSTER");
+
+
+}
