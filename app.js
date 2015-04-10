@@ -244,7 +244,7 @@ function parseChat(data,socket){
             io.sockets.emit('chatmsg',{from: sanitize(roster[sockets.indexOf(socket)]),msg: sanitize(data.msg)});
         }
     }
-} 
+}
 function sanitize(input){
     return input.replace("<","&lt;");
 }
