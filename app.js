@@ -8,6 +8,11 @@ console.log ("server is up at http://localhost/");
 
 var sockets = [];
 var roster = [];
+var chatTimes = [];
+//var game = {};
+var players = [];
+
+
 
 function handler(req, res) {
     switch(req.url) {
@@ -53,28 +58,16 @@ function handler(req, res) {
 io.sockets.on('connect' , function(socket){
     console.log('identity requested');
     socket.emit('identify');
-    //console.log('identity requested');
 
     socket.on('identify',function(data){
         console.log('identity received');
         sockets.push(socket);
         roster.push(data.un);
+        chatTimes.push(new Date());
         socket.emit('updateRoster',{roster: roster});
         io.sockets.emit('userarrived',{un: data.un});
         io.sockets.emit('chatannouncement', {announcement: data.un + ' has entered the room'});
     })//identify
-
-
-    socket.on('sendchat',function(data){
-        console.log(data);
-        var i = sockets.indexOf(socket);
-        var user = roster[i];
-        console.log('user: ' + user + ' received user: ' + data.un + ' msg: ' + data.msg);
-        if(data.msg.trim().length > 0){
-            io.sockets.emit('chatmsg',{from: user,msg: sanitize(data.msg)});
-        }
-    });//sendchat
-
     socket.on('disconnect',function(){
         var i = sockets.indexOf(socket);
         sockets.splice(i,1);
@@ -85,7 +78,59 @@ io.sockets.on('connect' , function(socket){
         roster.splice(i,1);
     })//
 
+    socket.on('sendchat',function(data){
+        console.log(data);
+        var i = sockets.indexOf(socket);
+        var user = roster[i];
+        console.log('user: ' + user + ' received user: ' + data.un + ' msg: ' + data.msg);
+        parseChat(data,socket);
+    });//sendchat
+
+
+
 });//io.sockets.on('connect'....
+
+
+function parseChat(data,socket){
+    var un = data.un;
+    var msg = data.msg.trim();
+    var userIndex =  sockets.indexOf(socket);
+
+    if(msg.length > 0){
+
+        //    /command arg1 argextra
+        if (msg.substr(0,1)=="/"){
+            //it's a command
+            var args = msg.substr(1).split(" ");
+            console.log(args);
+            console.log(args[0]+"<-");
+            switch(args[0]){
+                case 'whisper':
+                    sockets[roster.indexOf(args[1])].emit('whisper', {from: "»" + un,msg: args.join(" ").substr(args[1].length + 9)})
+                    socket.emit('whispersent', {to: "«"+ args[1],msg: args.join(" ").substr(args[1].length + 9)})
+                    break;
+                case 'roll':
+                    io.sockets.emit('chatannouncement', {announcement: data.un + ' has rolled a ' + Math.floor(Math.random()* 100) });
+                    break;
+                case 'chattime':
+                    socket.emit('chatannouncement', {announcement: data.un + ' entered the room at: ' + chatTimes[userIndex] });
+                    break;
+                default:
+
+            }//switch
+        }else{
+            io.sockets.emit('chatmsg',{from: data.un,msg: sanitize(data.msg)});
+        }
+
+
+
+
+
+
+
+
+    }
+}
 
 function sanitize(input){
     return input.replace("<","&lt;");

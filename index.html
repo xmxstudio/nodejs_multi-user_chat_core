@@ -13,6 +13,10 @@
         var options ={'sync disconnect on unload': true};
         var socket = io.connect(null, options);
 
+        socket.on('connect',function(){
+            console.log('connected');
+        });
+        /* CHAT RELATED */
         socket.on('identify',function(){
             console.log('identifed myself!');
             socket.emit('identify',{un: username});
@@ -36,25 +40,32 @@
             roster.splice(i,1);
             updateRosterDisplay();
         });//userdeparted
-
         socket.on('chatannouncement',function(data){
             addAnnouncement(data.announcement);
         });
         socket.on('chatmsg',function(data){
             addChatLine(data.from,data.msg);
         })
-
-
-
-        socket.on('connect',function(){
-            console.log('connected');
+        socket.on('whisper',function(data){
+            addWhisper(data.from, data.msg);
+        })
+        socket.on('whispersent',function(data){
+            addWhisper(data.to, data.msg);
         });
+        /* GAME RELATED */
 
     </script>
 
 
 </head>
 
+
+<div id="gamewrapper">
+    <div id="gamecanvas">
+        [GAME CANVAS]
+    </div>
+
+</div>
 
  <div id="wrapper">
     <div id="chatroom">

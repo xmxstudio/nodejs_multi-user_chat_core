@@ -6,8 +6,13 @@ body{
     color: #777;
     margin: 50px;
 }
+ul{
+    margin:0px;
+    padding:0px;
+}
 li{
     list-stlye-type: none;
+    margin: 3px;
 }
 #wrapper{
 
@@ -28,7 +33,7 @@ li{
 }
 #chatlog{
     height: 270px;
-    overflow-y: scroll
+    overflow-y: scroll;
 }
 .chatlinemsg{
     display:block;
@@ -46,7 +51,8 @@ li{
 #chatlinemsg{
     width: 100%;
     margin: 10px 0 0 0 ;
-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #efefef;
 }
 .announcement{
     display:block;
@@ -69,6 +75,9 @@ border-radius: 3px;
 #chatroster li{
     display:block;
     list-style-type: none;
+    border-radius: 6px;
+    background-color: #c0c0c0;
+    padding: 3px;
 }
 
 
@@ -78,4 +87,34 @@ select:focus,
 textarea:focus,
 button:focus {
     outline: none;
+}
+
+
+#gamewrapper{
+    display:block;
+    width: 690px;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #555;
+    box-shadow: 0 0 7px #999;
+    margin: 0 auto;
+    padding: 5px;
+    margin-bottom: 3px;
+}
+#gamecanvas{
+    border-radius: 6px;
+    background-color: #c0c0c0;
+    height: 100%;
+    display:block;
+}
+.whisper{
+    font-style: italic;
+    color: #000066;
+}
+.self{
+    font-weight: bold;
+    background-color: #fff !important;
+
+
 }
